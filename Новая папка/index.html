@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusAI - Infinite Playground</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar: Chat History and Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-glow"></div>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>NexusAI</span>
+                </div>
+                <button class="icon-btn close-sidebar" id="closeSidebarBtn" title="Close Sidebar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <button class="new-chat-btn" id="newChatBtn">
+                <i class="fa-solid fa-plus"></i>
+                <span>Yangi Chat</span>
+            </button>
+
+            <div class="history-section">
+                <div class="section-title">Bugungi suhbatlar</div>
+                <div class="history-list" id="historyList">
+                    <!-- History items injected dynamically -->
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">U</div>
+                    <div class="user-info">
+                        <div class="user-name">Foydalanuvchi</div>
+                        <div class="user-status">Premium A'zo</div>
+                    </div>
+                </div>
+                <button class="icon-btn theme-toggle" id="themeToggleBtn" title="Mavzuni o'zgartirish">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="header-left">
+                    <button class="icon-btn menu-btn" id="menuBtn" title="Open Sidebar">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="active-persona-info">
+                        <div class="persona-avatar-header" id="headerPersonaAvatar">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div>
+                            <h1 class="persona-name-header" id="headerPersonaName">Assistant AI</h1>
+                            <p class="persona-status-header" id="headerPersonaStatus">Sizning universal yordamchingiz</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn" id="settingsToggleBtn" title="Parametrlarni ko'rsatish">
+                        <i class="fa-solid fa-sliders"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="messages-container" id="messagesContainer">
+                <!-- Welcome/Landing Screen -->
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-icon">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h2>NexusAI-ga xush kelibsiz!</h2>
+                    <p>Sizga qanday yordam bera olaman? Quyidagi tayyor shablonlardan birini tanlashingiz yoki chatni boshlashingiz mumkin.</p>
+                    
+                    <div class="prompt-suggestions">
+                        <div class="suggestion-card" data-prompt="Menga python dasturlash tilida tezkor saralash algoritmini yozib ber.">
+                            <i class="fa-solid fa-code"></i>
+                            <div>
+                                <h4>Kod yozish</h4>
+                                <p>"Menga tezkor saralash algoritmini..."</p>
+                            </div>
+                        </div>
+                        <div class="suggestion-card" data-prompt="Kreativ yondashuv bilan yangi anime qahramoni uchun hikoya va vizual ko'rinish yarat.">
+                            <i class="fa-solid fa-paint-brush"></i>
+                            <div>
+                                <h4>Manga g'oya</h4>
+                                <p>"Yangi anime qahramoni uchun hikoya..."</p>
+                            </div>
+                        </div>
+                        <div class="suggestion-card" data-prompt="Stressli kunlardan qanday qilib osongina o'tib ketish mumkin? Menga tavsiyalar ber.">
+                            <i class="fa-solid fa-seedling"></i>
+                            <div>
+                                <h4>Meditatsiya va ruhiyat</h4>
+                                <p>"Stressli kunlardan qanday o'tish..."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="chat-input-container">
+                <div class="input-actions-bar">
+                    <div class="attachment-preview" id="attachmentPreview">
+                        <img src="./assets/hero.png" alt="Manga Hero" id="previewImg">
+                        <button class="remove-attach" id="removeAttachBtn"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <button class="input-action-btn" id="attachBtn" title="Rasm biriktirish">
+                        <i class="fa-solid fa-paperclip"></i>
+                    </button>
+                    <textarea class="chat-input" id="chatInput" placeholder="Xabaringizni yozing..." rows="1"></textarea>
+                    <button class="input-action-btn mic-btn" id="micBtn" title="Ovozli kiritish">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                    <button class="send-btn" id="sendBtn" title="Yuborish">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="input-info">
+                    NexusAI xatoliklar qilishi mumkin. Muhim ma'lumotlarni tekshirib ko'ring.
+                </div>
+            </footer>
+        </main>
+
+        <!-- Right Sidebar: Configuration Panel -->
+        <aside class="settings-panel" id="settingsPanel">
+            <div class="panel-header">
+                <h3>Persona Sozlamalari</h3>
+                <button class="icon-btn close-panel" id="closePanelBtn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="panel-section">
+                <label class="section-label">Groq API Key</label>
+                <input type="password" class="settings-input" id="apiKeyInput" placeholder="gsk_..." value="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">
+            </div>
+
+            <div class="panel-section">
+                <label class="section-label">Modelni Tanlang</label>
+                <div class="persona-selector">
+                    <div class="persona-option active" data-persona="assistant">
+                        <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                        <div class="details">
+                            <div class="name">General Assistant</div>
+                            <div class="desc">Universal aqlli yordamchi</div>
+                        </div>
+                    </div>
+                    <div class="persona-option" data-persona="coder">
+                        <div class="avatar"><i class="fa-solid fa-code"></i></div>
+                        <div class="details">
+                            <div class="name">Code Master</div>
+                            <div class="desc">Dasturlash va refaktoring</div>
+                        </div>
+                    </div>
+                    <div class="persona-option" data-persona="manga">
+                        <div class="avatar-img-wrapper">
+                            <img src="./assets/hero.png" alt="Manga Artist" class="avatar-img">
+                        </div>
+                        <div class="details">
+                            <div class="name">Manga Creative</div>
+                            <div class="desc">Manga va art g'oyalari</div>
+                        </div>
+                    </div>
+                    <div class="persona-option" data-persona="zen">
+                        <div class="avatar"><i class="fa-solid fa-seedling"></i></div>
+                        <div class="details">
+                            <div class="name">Zen Coach</div>
+                            <div class="desc">Psixologik ko'mak va tinchlik</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <div class="slider-container">
+                    <div class="slider-header">
+                        <label>Creativity (Temperature)</label>
+                        <span id="tempValue">0.7</span>
+                    </div>
+                    <input type="range" class="custom-slider" id="tempSlider" min="0" max="1" step="0.1" value="0.7">
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <label class="section-label">Tizim Ko'rsatmasi (System Prompt)</label>
+                <textarea class="system-prompt-textarea" id="systemPrompt" placeholder="Modelning o'zini qanday tutishini belgilang..."></textarea>
+            </div>
+
+            <div class="panel-footer-actions">
+                <button class="secondary-btn" id="resetSettingsBtn">Standart holatga qaytarish</button>
+                <button class="primary-btn" id="saveSettingsBtn">Saqlash</button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="./js.js"></script>
+</body>
+</html>
